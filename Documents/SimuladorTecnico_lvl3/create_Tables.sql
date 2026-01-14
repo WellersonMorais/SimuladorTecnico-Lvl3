@@ -31,3 +31,44 @@ return_date date null,
 		FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+
+
+USE simulador_3;
+
+
+select * from users
+
+select * from books
+
+select title from books where title = 'Dom casmurro'
+
+select book_id from books where title = 'Dom Casmurro'
+
+select * from books where genre = 'terror'
+
+
+SELECT Books.title, Users.name, Loans.loan_date
+FROM Loans
+JOIN Books ON Loans.book_id = Books.book_id
+JOIN Users ON Loans.user_id = Users.user_id
+WHERE Loans.return_date IS NULL;
+
+SELECT Users.name
+FROM Users
+WHERE (SELECT COUNT(*) FROM Loans WHERE Loans.user_id =
+Users.user_id) > 3;
+
+CREATE FUNCTION TotalLoans (@user_id INT)
+RETURNS INT
+AS
+BEGIN
+RETURN (SELECT COUNT(*) FROM Loans WHERE user_id = @user_id);
+END;
+
+SELECT dbo.TotalLoans(2) AS total_emprestimos;
+
+select * from loans 
+
+
+
+
